@@ -45,19 +45,50 @@ public class MathController {
     @ResponseBody
     public String numberGuessed(@PathVariable int num, Model viewModel){
         Random random = new Random();
-        int numberRolled = random.nextInt(6) + 1;
+        int firstDie = random.nextInt(6) + 1;
+        int secondDie = random.nextInt(6) +1;
+        int thirdDie = random.nextInt(6) +1;
+        int fourthDie = random.nextInt(6) +1;
+        int fifthDie = random.nextInt(6) +1;
 
         String message = "";
-        if(num != numberRolled){
-            message = "You guessed the wrong answer!";
-        }else{
-            message = "You guessed the correct answer!";
+        int count = 0;
+
+        if(num == firstDie){
+            count = count + 1;
         }
 
-        viewModel.addAttribute("numberRolled", numberRolled);
+        if(num == secondDie){
+            count = count + 1;
+        }
+
+        if(num == thirdDie){
+            count = count + 1;
+        }
+
+        if(num == fourthDie){
+            count = count + 1;
+        }
+
+        if(num == fifthDie){
+            count = count + 1;
+        }
+
+        if(num == firstDie || num == secondDie || num == thirdDie || num == fourthDie || num == fifthDie){
+            message = "You guess the correct number!";
+        }else{
+            message = "You guessed the wrong number!";
+        }
+
+        viewModel.addAttribute("firstDie", firstDie);
+        viewModel.addAttribute("secondDie", secondDie);
+        viewModel.addAttribute("thirdDie", thirdDie);
+        viewModel.addAttribute("fourthDie", fourthDie);
+        viewModel.addAttribute("fifthDie", fifthDie);
+
         viewModel.addAttribute("message", message);
 
-        return  "<p>You rolled the number: " + numberRolled + "!     Your guess was number: " + num + "!     " + message+ "</p>" ;
+        return  "<p>You rolled the numbers: " + firstDie + ", " + secondDie + ", " + thirdDie + ", " +fourthDie + ",  and "+ fifthDie + "!     Your guess was number: " + num + "!     Your number matched " + count + " of the dice!     " + message+ "</p>" ;
     }
 
 }
