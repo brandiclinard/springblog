@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+<!--    must close each tag with / if it doesnt have another one with the </identification> to close the tag due to being XML in THYMELEAF  -->
+    <title>Title</title>
+</head>
+<body id="index-body">
+
+<h1>this is the home page</h1>
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndfkQsUo3AUnvL6hTXiUNbo1lugG-FzTiNaxwmfPyKFYRbPLg" alt="" th:if="${role != 'admin'}"/>
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTumSXy_ISZXpK1lrkrAyG3g_SYwJNps9K7D85RXz0MHzRGmk0TLQ" alt="" th:if="${role == 'admin'}"/>
+
+<ul>
+    <li class="lists" th:each="color : ${colors}" th:text="${color}"></li>
+</ul>
+
+<th:block th:include="fragments/footer :: my-footer">
+
+</th:block>
+
+<!-- this will render and then disappear by the time it renders-->
+
+</body>
+</html>

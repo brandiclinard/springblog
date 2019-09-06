@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -9,17 +10,12 @@ class HelloController {
 
 
     //GET METHODS
-    @GetMapping("/hello")
-    @ResponseBody
-    public String hello() {
-        return "<h2>Hello from Spring!</h2>";
+    @GetMapping("/hello/{name}")
+    public String hello(@PathVariable String name, Model viewModel) {
+        viewModel.addAttribute("name", name);
+        return "hello";
     }
 
-    @GetMapping("/hello/{name}")
-    @ResponseBody
-    public String sayHello(@PathVariable String name) {
-        return "<h1>Hello " + name + "!</h1>";
-    }
 
     @RequestMapping(path = "/increment/{number}", method = RequestMethod.GET)
     @ResponseBody
