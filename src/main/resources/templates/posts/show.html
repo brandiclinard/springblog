@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
 
-<h1 th:text="${post.title}"></h1>
-<p th:text="${post.body}"></p>
+<h1 th:text="${post.title}"/>
+<p th:text="${post.body}"/>
+<a th:href="@{/posts/edit/{id}(id=${post.id})}" class="btn btn-primary">Edit Post</a>
+<a th:href="@{/posts/delete/{id}(id=${post.id})}" class="btn btn-primary">Delete Post</a>
+
+
 
 </body>
 </html>

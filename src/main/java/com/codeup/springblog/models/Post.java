@@ -2,7 +2,8 @@ package com.codeup.springblog.models;
 
 import javax.persistence.*;
 
-@Entity(name = "posts")// must do this to create the name of the table unless you want it to populate as post in MYSQL
+@Entity
+@Table(name = "posts")// must do this to create the name of the table unless you want it to populate as post in MYSQL
 public class Post {
     @Id @GeneratedValue
     private long id;

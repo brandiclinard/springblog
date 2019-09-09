@@ -6,14 +6,13 @@ import com.codeup.springblog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
 
 @Controller
-public class PostController {
+public class PostController{
+
 
     private final PostRepository postDao;
 
@@ -28,30 +27,61 @@ public class PostController {
         return "posts/index";
     }
 
-    @GetMapping("/posts")
-    public String index(@PathVariable long id, Model viewModel){
+    @GetMapping("/posts/{id}")
+    public String show(@PathVariable long id, Model viewModel){
         Post post = postDao.findOne(id);
         viewModel.addAttribute("post", post );
-        return "posts/index";
+        return "posts/show";
     }
 
-//    @GetMapping("/posts/{id}")
-//    public String show(@PathVariable long id, Model viewModel){
-//        Post post = new Post(1,"testing", "testing testing");
-//        viewModel.addAttribute("post", post);
-//        return "posts/show";
-//    }
+    @GetMapping("/posts/edit/{id}")
+    public String editPost(@PathVariable long id, Model viewModel){
+        viewModel.addAttribute("post", postDao.findOne(id));
+        return "posts/edit";
+    }
 
-//    @GetMapping("posts/create")
-//    @ResponseBody
-//    public String createFormView(){
-//        return "<h1>VIEW THE FORM FOR CREATING A POST</h1>";
-//    }
-//
-//    @PostMapping("/posts/create")
-//    @ResponseBody
-//    public String create(){
-//        return "CREATE A NEW POST";
-//    }
+    @PostMapping("posts/edit/{id}")
+    public String update(@PathVariable long id, @ModelAttribute Post post){
+        postDao.save(post);
+        return "redirect: /posts";
+    }
+
+
+    @GetMapping("/posts/delete/{id}")
+    public String toDeletePost(@PathVariable long id){
+        postDao.delete(id);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/delete/{id}")
+    public String afterDelete(){
+        return "redirect:/posts";
+    }
+
+    @GetMapping("posts/delete/all")
+    public String deleteAllPosts(){
+        postDao.deleteAll();
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/delete/all")
+    public String afterDeleteAll(){
+        return "redirect:/posts";
+    }
+
+
+
+
+
+    @GetMapping("/posts/create")
+    @ResponseBody
+    public String createFormView(){
+        return "/post/create";
+    }
+
+    @PostMapping("/posts/create")
+    public String create(){
+        return "posts/show";
+    }
 
 }
