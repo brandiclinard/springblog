@@ -8,8 +8,9 @@
 
 <h1 th:text="${post.title}"/>
 <p th:text="${post.body}"/>
-<a th:href="@{/posts/edit/{id}(id=${post.id})}" class="btn btn-primary">Edit Post</a>
-<a th:href="@{/posts/delete/{id}(id=${post.id})}" class="btn btn-primary">Delete Post</a>
+<a href="#" th:text="${post.user.email}"></a>
+<button class="btn btn-primary"><a th:href="@{/posts/edit/{id}(id=${post.id})}" >Edit Post</a></button>
+<button class="btn btn-primary"><a th:href="@{/posts/delete/{id}(id=${post.id})}" >Delete Post</a></button>
 
 
 

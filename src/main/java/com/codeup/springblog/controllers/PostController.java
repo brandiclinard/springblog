@@ -2,7 +2,9 @@ package com.codeup.springblog.controllers;
 
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.PostRepository;
+import com.codeup.springblog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,14 @@ public class PostController{
 
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postRepository){
-        postDao = postRepository;
+
+    public PostController(PostRepository postRepository, UserRepository userRepository){
+        this.postDao = postRepository;
+        this.userDao = userRepository;
     }
+
 
     //the above two lines are the dependency injection to have access to the db
 
@@ -78,9 +84,13 @@ public class PostController{
 
     @PostMapping("/posts/create")
     public String createPost(@RequestParam(name="title") String title, @RequestParam(name="body") String body){
+        User userDB =userDao.findOne(1L);
         Post createPost = new Post();
+
         createPost.setTitle(title);
         createPost.setBody(body);
+        createPost.setUser(userDB);
+
         Post savedPost = postDao.save(createPost);
         return "redirect:/posts/" + savedPost.getId();
     }
