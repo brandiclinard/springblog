@@ -5,10 +5,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostController{
@@ -19,6 +16,8 @@ public class PostController{
     public PostController(PostRepository postRepository){
         postDao = postRepository;
     }
+
+    //the above two lines are the dependency injection to have access to the db
 
     @GetMapping("/posts")
     public String index(Model viewModel){
@@ -41,9 +40,12 @@ public class PostController{
     }
 
     @PostMapping("posts/edit/{id}")
-    public String update(@PathVariable long id, @ModelAttribute Post post){
-        postDao.save(post);
-        return "redirect: /posts";
+    public String update(@PathVariable long id, @RequestParam(name= "title") String title, @RequestParam(name="body") String body, Model viewModel){
+        Post newPost = postDao.findOne(id);
+        newPost.setTitle(title);
+        newPost.setBody(body);
+        postDao.save(newPost);
+        return "redirect:/posts/" + newPost.getId();
     }
 
 
@@ -69,19 +71,18 @@ public class PostController{
         return "redirect:/posts";
     }
 
-
-
-
-
     @GetMapping("/posts/create")
-    @ResponseBody
     public String createFormView(){
-        return "/post/create";
+        return "/posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String create(){
-        return "posts/show";
+    public String createPost(@RequestParam(name="title") String title, @RequestParam(name="body") String body){
+        Post createPost = new Post();
+        createPost.setTitle(title);
+        createPost.setBody(body);
+        Post savedPost = postDao.save(createPost);
+        return "redirect:/posts/" + savedPost.getId();
     }
 
 }

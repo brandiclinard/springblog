@@ -11,21 +11,13 @@ public interface PostRepository extends CrudRepository<Post, Long> {// use model
 
     //full crud functionality easily accessible here.
 
-//    List<Post> getAll();
-//
-////    @Query("from Post p where p.id like ?1")
-//    Post getPostById(long id);
-//
-//    @Query("from Post p where p.title like %:term%")
-//    List<Post> searchByTitleLike(@Param("term") String term);
-//
-//    boolean addPost(Post post);
-//
-//    void update(Post post);
-//
-//    void delete(long id);
-//
-//    void deleteAll();
+
+
+    Post findByTitle (String title);
+
+    @Query("from Post p where p.title like %:term%")
+    List<Post> searchByTitleLike(@Param("term") String term);
+
 
 
 
