@@ -9,11 +9,28 @@
 
 
 
-<form th:action="@{/posts/create}" method="post">
-    Title:<br/>
-    <input type="text" name="title"/><br/>
-    Body:<br/>
-    <input type="text" name="body"/><br/><br/>
+<!--<form th:action="@{/posts/create}" method="post">-->
+<!--    Title:<br/>-->
+<!--    <input type="text" name="title"/><br/>-->
+<!--    Body:<br/>-->
+<!--    <input type="text" name="body"/><br/><br/>-->
+<!--    images:<br/>-->
+<!--    <input type="text" name="path"/><br/><br/>-->
+<!--&lt;!&ndash;    Categories:<br/>&ndash;&gt;-->
+<!--&lt;!&ndash;    <select multiple name="categories">&ndash;&gt;-->
+<!--&lt;!&ndash;        <option th:value="">Volvo</option>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </select>&ndash;&gt;-->
+<!--    <button class="btn btn-info">Create</button>-->
+<!--</form>-->
+
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+    Title:
+    <input th:field="*{title}" />
+    <br />
+    Description:
+    <input th:field="*{body}" />
+    <br />
     <button class="btn btn-info">Create</button>
 </form>
 

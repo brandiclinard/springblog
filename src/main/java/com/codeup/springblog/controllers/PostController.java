@@ -2,7 +2,9 @@ package com.codeup.springblog.controllers;
 
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.Category;
 import com.codeup.springblog.models.User;
+//import com.codeup.springblog.repos.CategoryRepository;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -78,20 +80,18 @@ public class PostController{
     }
 
     @GetMapping("/posts/create")
-    public String createFormView(){
+    public String createFormView(Model viewModel){
+    viewModel.addAttribute("post", new Post());
         return "/posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@RequestParam(name="title") String title, @RequestParam(name="body") String body){
+    public String createPost(@ModelAttribute Post post){
         User userDB =userDao.findOne(1L);
-        Post createPost = new Post();
 
-        createPost.setTitle(title);
-        createPost.setBody(body);
-        createPost.setUser(userDB);
+        post.setUser(userDB);
 
-        Post savedPost = postDao.save(createPost);
+        Post savedPost = postDao.save(post);
         return "redirect:/posts/" + savedPost.getId();
     }
 

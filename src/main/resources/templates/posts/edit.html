@@ -7,11 +7,11 @@
 <body>
 <!--edit form below-->
 
-<form th:action="@{'/posts/edit/' + ${post.id}}" method="post">
+<form th:action="@{'/posts/edit/' + ${post.id}}" th:method="post" th:object="${post}">
     Title:<br/>
-    <input type="text" name="title" th:value="${post.title}"/><br/>
+    <input type="text"  th:field="*{title}"/><br/>
     Body:<br/>
-    <input type="text" name="body" th:value="${post.body}"/><br/><br/>
+    <input type="text"  th:field="*{body}"/><br/><br/>
 <button class="btn btn-warning">Edit</button>
 </form>
 </body>

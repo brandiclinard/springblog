@@ -6,12 +6,22 @@
 </head>
 <body>
 
+
+<container>
 <h1 th:text="${post.title}"/>
+<h5>
+    <ul>
+    <li th:each="category : ${post.categories}" th:text="${category.name}" />
+    </ul>
+</h5>
+<img th:each="img : ${post.imgs}" th:src="${img.path}" alt="image"/>
 <p th:text="${post.body}"/>
 <a href="#" th:text="${post.user.email}"></a>
-<button class="btn btn-primary"><a th:href="@{/posts/edit/{id}(id=${post.id})}" >Edit Post</a></button>
-<button class="btn btn-primary"><a th:href="@{/posts/delete/{id}(id=${post.id})}" >Delete Post</a></button>
-
+<div>
+    <button class="btn btn-primary"><a th:href="@{/posts/edit/{id}(id=${post.id})}" >Edit Post</a></button>
+    <button class="btn btn-primary"><a th:href="@{/posts/delete/{id}(id=${post.id})}" >Delete Post</a></button>
+</div>
+</container>
 
 
 </body>
