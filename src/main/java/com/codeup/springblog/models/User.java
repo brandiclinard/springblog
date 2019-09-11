@@ -19,17 +19,29 @@ public class User {
     @Column(nullable = false, unique = true)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "user")
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="users_books",
+            joinColumns={@JoinColumn(name="user_id")},
+            inverseJoinColumns={@JoinColumn(name="book_id")}
+    )
     private List<Book> books;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Post> posts;
+
 
     public User() {
     }
 
-    public User(long id,String username, String email, String password) {
+    public User(long id, String username, String email, String password, List<Book> books, List<Post> posts) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.books = books;
+        this.posts = posts;
     }
 
     public long getId() {
@@ -62,5 +74,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
