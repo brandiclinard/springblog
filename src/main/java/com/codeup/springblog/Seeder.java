@@ -1,21 +1,5 @@
 package com.codeup.springblog;
 
-import com.codeup.springblog.models.Book;
-import com.codeup.springblog.models.Category;
-import com.codeup.springblog.models.Post;
-import com.codeup.springblog.models.User;
-import com.codeup.springblog.repos.PostRepository;
-import com.codeup.springblog.repos.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 //@Component
 //public class Seeder implements CommandLineRunner {
 //    private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -44,15 +28,15 @@ import java.util.Random;
 //    }
 //
 //// generate a list of categories and return it after saving
-////    private List<Category> seedCategories() {
-////        List<Category> categories = Arrays.asList(
-////                new Category("Season One", List [1]),
-////                new Category("Season Two", List [2]),
-////                new Category("Season Three", List [3]),
-////                new Category("Season Four", List [4]),
-////                new Category("Season Five", List [5]),
-////                new Category("Season Six", List [6]),
-////                new Category("Season Seven", List [7])
+////    private List<Season.java> seedCategories() {
+////        List<Season.java> categories = Arrays.asList(
+////                new Season.java("Season.java One", List [1]),
+////                new Season.java("Season.java Two", List [2]),
+////                new Season.java("Season.java Three", List [3]),
+////                new Season.java("Season.java Four", List [4]),
+////                new Season.java("Season.java Five", List [5]),
+////                new Season.java("Season.java Six", List [6]),
+////                new Season.java("Season.java Seven", List [7])
 ////                );
 ////        userDao.save(categories);
 ////        return categories;

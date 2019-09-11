@@ -18,22 +18,22 @@ public class Post {
     private List<PostImg> imgs;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name="posts_categories",
+            name="posts_books",
             joinColumns={@JoinColumn(name="post_id")},
-            inverseJoinColumns={@JoinColumn(name="category_id")}
+            inverseJoinColumns={@JoinColumn(name="book_id")}
     )
-    private List<Category> categories;
+    private List<Book> books ;
 
 
     public Post(){}
 
-    public Post(long id, String title, String body, User user, List<PostImg> imgs, List<Category> categories) {
+    public Post(long id, String title, String body, User user, List<PostImg> imgs, List<Book> books) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.user = user;
         this.imgs = imgs;
-        this.categories = categories;
+        this.books = books;
     }
 
     public String getTitle() {
@@ -76,11 +76,11 @@ public class Post {
         this.imgs = imgs;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

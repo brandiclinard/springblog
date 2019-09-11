@@ -15,14 +15,19 @@ public class Book {
     private String summary;
     @Column
     private String author;
+    @Column
+    private String imgPath;
+    @OneToOne
+    private Season season;
 
     public Book() {
     }
 
-    public Book(String title, String author, String summary) {
+    public Book(String title, String author, String summary, String imgPath) {
         this.title = title;
         this.author = author;
         this.summary = summary;
+        this.imgPath = imgPath;
     }
 
     public long getId() {
@@ -55,5 +60,13 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }
