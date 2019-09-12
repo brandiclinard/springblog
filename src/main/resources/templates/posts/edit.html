@@ -5,6 +5,9 @@
 
 </head>
 <body>
+<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+
+<container>
 <!--edit form below-->
 
 <form th:action="@{'/posts/edit/' + ${post.id}}" th:method="post" th:object="${post}">
@@ -14,6 +17,8 @@
     <input type="text"  th:field="*{body}"/><br/><br/>
 <button class="btn btn-warning">Edit</button>
 </form>
+
+</container>
 
 <th:block th:include="fragments/bootstrap :: scripts" ></th:block>
 

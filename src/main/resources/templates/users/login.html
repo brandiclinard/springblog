@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Log In</title>
+    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+
 </head>
 <body>
+<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+
+<container>
 <h1>Log In</h1>
 <div class="alert alert-danger" th:if="${param.error}">
     Invalid Username and Password.
@@ -21,5 +24,10 @@
     <input id="password" name="password" type="password" />
     <input type="submit" value="Log In" />
 </form>
+
+</container>
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+<th:block th:include="fragments/footer :: my-footer"></th:block>
+
 </body>
 </html>

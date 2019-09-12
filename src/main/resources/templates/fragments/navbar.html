@@ -7,15 +7,12 @@
 <nav class="main-nav" th:fragment="top-nav">
     <ul class="nav">
         <li class="nav"><a href="/home">Home</a></li>
-        <li class="nav"><a href="/posts/create">Create Posts</a></li>
-        <li class="nav"><a href="/posts">View posts</a></li>
-        <li class="nav"><a href="/register">Register</a></li>
-        <li class="nav"><a href="/login">Login</a> </li>
-        <li>
-            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
-                <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-            </form>
-        </li>
+        <li class="nav"><a href="/posts">View Books</a></li>
+        <li class="nav"><form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post"><a href="/posts/create">Create Posts</a></form></li>
+        <li class="nav"><form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post"><a href="/users/profile">View Profile</a></form></li>
+        <li class="nav"><a href="/sign-up">Register</a></li>
+        <li class="nav"><form sec:authorize="isAnonymous()" th:action="@{/login}" th:method="post"><a href="/login">Login</a></form></li>
+        <li><form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post"><a href="/login?logout">Logout</a></form></li>
     </ul>
 </nav>
 

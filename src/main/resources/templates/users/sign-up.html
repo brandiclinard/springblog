@@ -3,13 +3,12 @@
 <head>
     <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
 
-
 </head>
 <body>
-
-
 <th:block th:replace="fragments/navbar :: top-nav"></th:block>
 
+
+<container>
 
 <h1>Create an account</h1>
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">
@@ -29,6 +28,8 @@
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTumSXy_ISZXpK1lrkrAyG3g_SYwJNps9K7D85RXz0MHzRGmk0TLQ" alt="" th:if="${role == 'admin'}"/>
 
+
+</container>
 
 <th:block th:include="fragments/bootstrap :: scripts" ></th:block>
 
