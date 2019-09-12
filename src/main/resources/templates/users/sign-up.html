@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+
+
+</head>
+<body>
+
+
+<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+
+
+<h1>Create an account</h1>
+<form th:action="@{/sign-up}" method="POST" th:object="${user}">
+    <label for="username">Username</label>
+    <input id="username" th:field="*{username}" />
+
+    <label for="email">Email</label>
+    <input id="email" th:field="*{email}" />
+
+    <label for="password">Password</label>
+    <input id="password" type="password" th:field="*{password}" />
+
+    <input value="Sign me up!" type="submit" />
+</form>
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndfkQsUo3AUnvL6hTXiUNbo1lugG-FzTiNaxwmfPyKFYRbPLg" alt="" th:if="${role != 'admin'}"/>
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTumSXy_ISZXpK1lrkrAyG3g_SYwJNps9K7D85RXz0MHzRGmk0TLQ" alt="" th:if="${role == 'admin'}"/>
+
+
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+
+
+
+
+<th:block th:include="fragments/footer :: my-footer">
+</th:block>
+</body>
+</html>
