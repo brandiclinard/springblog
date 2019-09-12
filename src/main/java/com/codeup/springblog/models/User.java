@@ -31,17 +31,20 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Status> statuses;
 
     public User() {
     }
 
-    public User(long id, String username, String email, String password, List<Book> books, List<Post> posts) {
+    public User(long id, String username, String email, String password, List<Book> books, List<Post> posts, List<Status> statuses) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.books = books;
         this.posts = posts;
+        this.statuses = statuses;
     }
 
     public long getId() {
@@ -90,5 +93,13 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public List<Status> getStatuses() {
+        return statuses;
+    }
+
+    public void setStatuses(List<Status> statuses) {
+        this.statuses = statuses;
     }
 }

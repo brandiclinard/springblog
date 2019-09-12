@@ -23,14 +23,15 @@ public class Book {
     private Season season;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
     private List<Post> posts;
-
     @ManyToMany(mappedBy = "books")
     private List<User> users;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
+    private List<Status> statuses;
 
     public Book() {
     }
 
-    public Book(long id, String title, String author, String summary, String imgPath, Season season, List<Post> posts, List<User> users) {
+    public Book(long id, String title, String author, String summary, String imgPath, Season season, List<Post> posts, List<User> users, List<Status> statuses) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -39,6 +40,7 @@ public class Book {
         this.season = season;
         this.posts = posts;
         this.users = users;
+        this.statuses = statuses;
     }
 
     public long getId() {
@@ -103,5 +105,13 @@ public class Book {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public List<Status> getStatuses() {
+        return statuses;
+    }
+
+    public void setStatuses(List<Status> statuses) {
+        this.statuses = statuses;
     }
 }
