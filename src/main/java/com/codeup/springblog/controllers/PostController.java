@@ -45,7 +45,7 @@ public class PostController {
 
         viewModel.addAttribute("posts", books );
         return "posts/index";
-    }
+
 
 
     @GetMapping("/posts/{id}")
