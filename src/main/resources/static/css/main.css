@@ -1,0 +1,44 @@
+.footerul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: cornflowerblue;
+    text-align: center ;
+}
+
+.footerli {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: royalblue;
+}
+
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: cornflowerblue;
+    color: white;
+    text-align: center;
+}
+
+.main-nav{
+    position: fixed;
+    left: 0;
+    top:25rem;
+    width: 100%;
+    background-color: cornflowerblue;
+    color: white;
+    text-align: center;
+}

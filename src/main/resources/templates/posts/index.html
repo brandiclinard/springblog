@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
+<h1>You will view posts here!</h1>
+<a th:href="@{/posts/delete/all}" class="btn btn-primary">Delete all Posts</a>
+<div>
+    <div class="card" th:each="post : ${posts}">
+        <h1 th:text="${post.title}" />
+        <p th:text="${post.body}" />
+        <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">See Post</a>
+
+    </div>
+</div>
 
 </body>
 </html>
