@@ -6,6 +6,9 @@ import com.codeup.springblog.models.User;
 //import com.codeup.springblog.repos.CategoryRepository;
 import com.codeup.springblog.repos.PostRepository;
 import com.codeup.springblog.repos.UserRepository;
+import com.codeup.springblog.services.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +25,9 @@ public class PostController{
         this.postDao = postRepository;
         this.userDao = userRepository;
     }
+
+    @Autowired
+    private EmailService emailService;
 
 
     //the above two lines are the dependency injection to have access to the db
@@ -86,12 +92,17 @@ public class PostController{
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post){
-        User userDB =userDao.findOne(1L);
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userDB = userDao.findOne(userSession.getId());
 
         post.setUser(userDB);
 
         Post savedPost = postDao.save(post);
+
+        emailService.prepareAndSend(savedPost, "Post Created", String.format("Post with the ID of %d has been created!", savedPost.getId()));
+
         return "redirect:/posts/" + savedPost.getId();
     }
 
 }
+

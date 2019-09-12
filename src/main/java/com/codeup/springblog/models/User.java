@@ -10,7 +10,7 @@ public class User {
     @Id @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -45,6 +45,14 @@ public class User {
         this.books = books;
         this.posts = posts;
         this.statuses = statuses;
+    }
+
+//    security constructor -- anything updated with the original user needs to also be updated witht he copy
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
     }
 
     public long getId() {

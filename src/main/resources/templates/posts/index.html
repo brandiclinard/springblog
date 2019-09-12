@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+
 </head>
 <body>
 <h1>You will view posts here!</h1>
@@ -16,5 +17,13 @@
     </div>
 </div>
 
+
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+
+
+
+
+<th:block th:include="fragments/footer :: my-footer">
+</th:block>
 </body>
 </html>
