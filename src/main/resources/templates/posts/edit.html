@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+
 </head>
 <body>
 <!--edit form below-->
@@ -14,5 +14,13 @@
     <input type="text"  th:field="*{body}"/><br/><br/>
 <button class="btn btn-warning">Edit</button>
 </form>
+
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+
+
+
+
+<th:block th:include="fragments/footer :: my-footer">
+</th:block>
 </body>
 </html>

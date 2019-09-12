@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title></title>
+    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+
 </head>
 <body>
 <h1>Create a Post!</h1>
@@ -34,5 +34,14 @@
     <button class="btn btn-info">Create</button>
 </form>
 
+
+
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+
+
+
+
+<th:block th:include="fragments/footer :: my-footer">
+</th:block>
 </body>
 </html>
