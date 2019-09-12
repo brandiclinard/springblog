@@ -12,11 +12,11 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
-    @ResponseBody// only use if the purpose will be returning text to the view
-    public String landing() {
-        return "<h1>THIS IS THE LANDING PAGE!!</h1>";
-    }
+//    @GetMapping("/")
+//    @ResponseBody// only use if the purpose will be returning text to the view
+//    public String landing() {
+//        return "<h1>THIS IS THE LANDING PAGE!!</h1>";
+//    }
 
 
         @GetMapping("/home")
@@ -34,8 +34,8 @@ public class HomeController {
                 role = "admin";
             }
             viewModel.addAttribute("role", role);
-            viewModel.addAttribute("colors", colors);
-        return "home";
+//            viewModel.addAttribute("colors", colors);
+        return "/home";
         }
 
 }

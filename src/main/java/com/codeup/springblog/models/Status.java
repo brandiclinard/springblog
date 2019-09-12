@@ -11,7 +11,7 @@ public class Status {
     @GeneratedValue
     private long id;
     @Column
-    private String status;
+    private String name;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -24,9 +24,9 @@ public class Status {
     public Status() {
     }
 
-    public Status(long id, String status, User user, Book book) {
+    public Status(long id, String name, User user, Book book) {
         this.id = id;
-        this.status = status;
+        this.name = name;
         this.user = user;
         this.book = book;
     }
@@ -39,12 +39,12 @@ public class Status {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
+    public String getName() {
+        return name;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public User getUser() {

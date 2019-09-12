@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+
+
+
+<div class="container">
+
+    <h1 th:text="${book.title}"/>
+<!--    <h5>-->
+<!--        <li th:each="season : ${book.seasons}" th:text="${season.name}" />-->
+<!--    </h5>-->
+    <img th:each="img : ${book}" th:src="${book.imgPath}" alt="image" height="300rem" width="300rem"/>
+    <h5 th:text="${book.author}"></h5>
+    <p th:text="${book.summary}"></p>
+
+
+
+
+<!--<h1 th:text="${post.title}"/>-->
+<!--<h5>-->
+<!--    <ul>-->
+<!--    <li th:each="category : ${post.categories}" th:text="${category.name}" />-->
+<!--    </ul>-->
+<!--</h5>-->
+<!--<img th:each="img : ${post.imgs}" th:src="${img.path}" alt="image"/>-->
+<!--<p th:text="${post.body}"/>-->
+<!--<a href="#" th:text="${post.user.email}"></a>-->
+<!--<div>-->
+<!--    <button class="btn btn-primary"><a th:href="@{/posts/edit/{id}(id=${post.id})}" >Edit Post</a></button>-->
+<!--    <button class="btn btn-primary"><a th:href="@{/posts/delete/{id}(id=${post.id})}" >Delete Post</a></button>-->
+<!--</div>-->
+
+
+
+
+
+</div>
+
+
+
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+
+
+
+
+<th:block th:include="fragments/footer :: my-footer">
+</th:block>
+</body>
+</html>

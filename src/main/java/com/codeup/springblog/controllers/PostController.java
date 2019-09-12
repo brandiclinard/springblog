@@ -46,6 +46,13 @@ public class PostController{
         return "posts/show";
     }
 
+//    @GetMapping("/posts/search")
+//    public String show(@RequestParam(name = "term") String term, Model viewModel) {
+//        List<Post> posts = postDao.searchByTitleOrAuthorLike(term);
+//        viewModel.addAttribute("posts", posts);
+//        return "posts/index";
+//    }
+
     @GetMapping("/posts/edit/{id}")
     public String editPost(@PathVariable long id, Model viewModel){
         viewModel.addAttribute("post", postDao.findOne(id));
