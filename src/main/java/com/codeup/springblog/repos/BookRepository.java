@@ -1,6 +1,8 @@
 package com.codeup.springblog.repos;
 
 import com.codeup.springblog.models.Book;
+import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.Season;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +20,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {// use model
     @Query("from Book b where b.title like %:term% or b.author like %:term%")
     List<Book> searchByTitleOrAuthor(@Param("term") String term);
 
-//    @Query("from Book b join id on b.season_id = seasons.id where );
-//    List<Book>searchBySeason(@Param("seasonSelection") long seasonSelection);
+    List<Book> findBySeason(Season season);
+
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
 
@@ -24,6 +24,7 @@
     </div>
 
 
+    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post"><button class="btn btn-success"><a th:href="@{/books/userPosts/{id}(id=${book.id})}" >View Your Posts</a></button></form>
 <!--        <div class="card" th:each="post : ${posts}">-->
 <!--            <h1 th:text="${book.imgPath}" />-->
     <div class="img" th:each="post : ${posts}">

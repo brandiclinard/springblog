@@ -23,11 +23,13 @@ public class BookController {
     private final BookRepository bookDao;
     private final SeasonRepository seasonDao;
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public BookController(BookRepository bookRepository, SeasonRepository seasonRepository, PostRepository postRepository){
+    public BookController(BookRepository bookRepository, SeasonRepository seasonRepository, PostRepository postRepository, UserRepository userRepository){
         this.bookDao = bookRepository;
         this.seasonDao = seasonRepository;
         this.postDao = postRepository;
+        this.userDao = userRepository;
     }
 
     @Autowired
@@ -53,9 +55,8 @@ public class BookController {
     public String showSeasonBooks(@RequestParam(name = "seasonSelection") long seasonSelection, Model viewModel) {
         Season season = seasonDao.findOne(seasonSelection);
         viewModel.addAttribute("season", season);
-////        List<Book> books = bookDao.searchByTitleOrAuthor(term);
-//        Iterable<Book> books = bookDao.searchBySeason(seasonSelection);
-//        viewModel.addAttribute("books", books);
+        List<Book> books = bookDao.findBySeason(season);
+        viewModel.addAttribute("books", books);
         return "books/index";
     }
 
@@ -63,9 +64,22 @@ public class BookController {
     public String showBook(@PathVariable long id, Model viewModel){
         Book book= bookDao.findOne(id);
         viewModel.addAttribute("book", book );
-        Iterable<Post> posts = postDao.findAll();
+        List<Post> posts = postDao.findByBook(book);
         viewModel.addAttribute("posts", posts );
         return "books/show";
+    }
+
+    @GetMapping("/books/userPosts/{id}")
+    public String showUserBookPosts(@PathVariable long id, Model viewModel){
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        User user = userDao.findOne(userId);
+        viewModel.addAttribute("user", user);
+        List<Post> posts = postDao.findByUserAndBook(user, book);
+        viewModel.addAttribute("posts", posts);
+        return("books/show");
     }
 
     @GetMapping("/books/create")
