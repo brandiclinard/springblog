@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {// use model
     @Query("from Book b where b.title like %:term% or b.author like %:term%")
     List<Book> searchByTitleOrAuthor(@Param("term") String term);
 
+//    @Query("from Book b join id on b.season_id = seasons.id where );
+//    List<Book>searchBySeason(@Param("seasonSelection") long seasonSelection);
 }

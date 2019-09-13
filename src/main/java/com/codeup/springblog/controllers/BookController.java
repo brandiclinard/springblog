@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Book;
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.Season;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.BookRepository;
 import com.codeup.springblog.repos.PostRepository;
@@ -36,18 +37,30 @@ public class BookController {
     public String index(Model viewModel){
         Iterable<Book> books = bookDao.findAll();
         viewModel.addAttribute("books", books );
+        Iterable<Season> seasons = seasonDao.findAll();
+        viewModel.addAttribute("seasons", seasons);
         return "books/index";
     }
 
        @GetMapping("/books/search")
-    public String show(@RequestParam(name = "term") String term, Model viewModel) {
+    public String showByAuthorOrTitle(@RequestParam(name = "term") String term, Model viewModel) {
         List<Book> books = bookDao.searchByTitleOrAuthor(term);
         viewModel.addAttribute("books", books);
         return "books/index";
     }
 
+    @GetMapping("/books/seasonSearch")
+    public String showSeasonBooks(@RequestParam(name = "seasonSelection") long seasonSelection, Model viewModel) {
+        Season season = seasonDao.findOne(seasonSelection);
+        viewModel.addAttribute("season", season);
+////        List<Book> books = bookDao.searchByTitleOrAuthor(term);
+//        Iterable<Book> books = bookDao.searchBySeason(seasonSelection);
+//        viewModel.addAttribute("books", books);
+        return "books/index";
+    }
+
     @GetMapping("/books/{id}")
-    public String show(@PathVariable long id, Model viewModel){
+    public String showBook(@PathVariable long id, Model viewModel){
         Book book= bookDao.findOne(id);
         viewModel.addAttribute("book", book );
         Iterable<Post> posts = postDao.findAll();
