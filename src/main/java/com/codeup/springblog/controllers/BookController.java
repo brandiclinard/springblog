@@ -21,10 +21,12 @@ public class BookController {
 
     private final BookRepository bookDao;
     private final SeasonRepository seasonDao;
+    private final PostRepository postDao;
 
-    public BookController(BookRepository bookRepository, SeasonRepository seasonRepository){
+    public BookController(BookRepository bookRepository, SeasonRepository seasonRepository, PostRepository postRepository){
         this.bookDao = bookRepository;
         this.seasonDao = seasonRepository;
+        this.postDao = postRepository;
     }
 
     @Autowired
@@ -48,6 +50,8 @@ public class BookController {
     public String show(@PathVariable long id, Model viewModel){
         Book book= bookDao.findOne(id);
         viewModel.addAttribute("book", book );
+        Iterable<Post> posts = postDao.findAll();
+        viewModel.addAttribute("posts", posts );
         return "books/show";
     }
 

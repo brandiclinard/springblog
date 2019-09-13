@@ -11,6 +11,8 @@
 
 <div class="container">
 
+    <div>
+
     <h1 th:text="${book.title}"/>
 <!--    <h5>-->
 <!--        <li th:each="season : ${book.seasons}" th:text="${season.name}" />-->
@@ -19,7 +21,19 @@
     <h5 th:text="${book.author}"></h5>
     <p th:text="${book.summary}"></p>
 
+    </div>
 
+
+<!--        <div class="card" th:each="post : ${posts}">-->
+<!--            <h1 th:text="${book.imgPath}" />-->
+    <div class="img" th:each="post : ${posts}">
+<!--        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>-->
+                <h5 th:text="${post.title}"></h5>
+                <p th:text="${post.body}"></p>
+            <button class="btn btn-primary"><a th:href="@{/posts/edit/{id}(id=${post.id})}" >Edit Post</a></button>
+            <button class="btn btn-primary"><a th:href="@{/posts/delete/{id}(id=${post.id})}" >Delete Post</a></button>
+<!--                <a th:href="@{/books/{id}(id=${book.id})}" class="btn btn-primary">View Book</a>-->
+    </div>
 
 
 <!--<h1 th:text="${post.title}"/>-->

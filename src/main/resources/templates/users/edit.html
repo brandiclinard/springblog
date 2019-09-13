@@ -4,11 +4,16 @@
 
 
 <head>
-    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+    <th:block th:replace="fragments/header :: main-header('Edit')">
+
+    </th:block>
 
 </head>
 <body>
-<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+<th:block th:replace="fragments/navbar :: top-nav">
+
+</th:block>
+<br/><br/>
 
 <h1>Edit profile!</h1>
 
@@ -22,11 +27,11 @@
         <label for="email">New Email:</label>
         <input id="email" th:field="*{email}" />
 
-        <h4>Current Password: <span th:text="${#authentication.principal.password}"></span></h4>
-        <label for="password">Password:</label>
+<!--        <h4>Current Password: <span th:text="${#authentication.principal.password}"></span></h4>-->
+        <label for="password">Change Password:</label>
         <input id="password" type="password" th:field="*{password}" />
 
-        <input value="Sign me up!" type="submit" />
+        <input value="Submit Changes" type="submit" />
     </form>
 
     <!--<div sec:authorize="isAuthenticated()">-->
@@ -37,12 +42,12 @@
     <!--    Email: <span th:text="${#authentication.principal.email}"/>-->
     <!--</div>-->
 </div>
-<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+<th:block th:include="fragments/bootstrap :: scripts" >
 
-
-
+</th:block>
 
 <th:block th:include="fragments/footer :: my-footer">
+
 </th:block>
 </body>
 </html>

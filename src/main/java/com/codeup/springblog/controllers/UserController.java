@@ -45,21 +45,34 @@ public class UserController {
     }
 
     @PostMapping("users/edit/{id}")
-    public String update(@PathVariable long id, @RequestParam(name= "username") String username, @RequestParam(name="email") String email, @RequestParam(name= "password") String password, Model viewModel){
-        User newUser = userDao.findOne(id);
-        newUser.setUsername(username);
-        newUser.setEmail(email);
-        newUser.setPassword(password);
-        userDao.save(newUser);
-        return "redirect:/profileView" + newUser.getId();
+    public String update(@PathVariable long id, @ModelAttribute User user){
+
+        User userSesssion = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        long userId = userSesssion.getId();
+//        boolean isAdmin = userSesssion.isAdmin();
+//        User userDB = userDao.findOne(userSesssion.getId());
+        user.setId(userSesssion.getId());
+
+//        User original = userDao.findOne(id);
+//        user.setId(original.getId());
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
+
+        User updatedUser = userDao.save(user);
+//        user.setPassword(original.getPassword());
+//        user.setUsername(original.getUsername());
+//        userDao.save(user);
+
+
+//        if(isAdmin) {
+//            return "redirect: /admindashboard";
+//        }else{
+//            return "redirect:/profileView";
+//        }
+        return "redirect:/login?edit";
     }
 
-//    @GetMapping("/profile")
-//    public String userPage(Model viewModel){
-//        viewModel.addAttribute("user", new User());
-//        return "users/profile";
-//    }
-
+// THIS WORKS
     @GetMapping("/profileView")
     public String profileView(Model viewModel, HttpServletRequest request){
         User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -74,8 +87,12 @@ public class UserController {
         return("users/profile");
     }
 
-//    @PostMapping("users/profile/{id}")
-//    public String viewProfile(@ModelAttribute User user){
-//        return ""
+
+//    @GetMapping("user/profileView")
+//    public String userProfileView(Model viewModel){
+//        viewModel.addAttribute("user", new User());
+//        return "redirect:/profileView";
 //    }
+
+
 }

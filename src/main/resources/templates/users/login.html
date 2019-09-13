@@ -6,29 +6,32 @@
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: top-nav"></th:block>
+<br/><br/>
 
-<container>
-<h1>Log In</h1>
+<div class="container">
 <div class="alert alert-danger" th:if="${param.error}">
     Invalid Username and Password.
 </div>
 <div class="alert alert-warning" th:if="${param.logout}">
     You have been logged out.
 </div>
+<div class="alert alert-success" th:if="${param.edit}">
+    You have edited your credentials to log in. Please log in with your new credentials.
+</div>
 
 <!--no form model binding due to just verifying parameters for login and ot creating or updating any information-->
     <h1>Log In:</h1>
 <form th:action="@{/login}" method="post">
-    <label for="username">Username</label>
+    <label for="username">Username:</label>
     <input id="username" name="username" type="text" />
     <br/>
-    <label for="password">Password</label>
+    <label for="password">Password:</label>
     <input id="password" name="password" type="password" />
     <br/>
     <input type="submit" value="Sign In" />
 </form>
 
-</container>
+</div>
 <th:block th:include="fragments/bootstrap :: scripts" ></th:block>
 <th:block th:include="fragments/footer :: my-footer"></th:block>
 
