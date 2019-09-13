@@ -8,19 +8,23 @@
 <body>
 <th:block th:replace="fragments/navbar :: top-nav"></th:block>
 
-<container>
+<h1>something</h1>
+
+<div class="container">
     <h1>Users profile!</h1>
-    <th:block></th:block>
-    <div>
-        <div class="card" th:each="post : ${posts}">
-            <h1 th:text="${post.title}" />
-            <p th:text="${post.body}" />
-            <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">See Post</a>
-        </div>
-    </div>
+<!--    <th:block>-->
+<!--    <div>-->
+<!--        <div class="card" th:each="post : ${posts}">-->
+<!--            <h1 th:text="${post.title}" />-->
+<!--            <p th:text="${post.body}" />-->
+<!--            <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">See Post</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </th:block>-->
+
+</div>
 
 
-</container>
 <th:block th:include="fragments/bootstrap :: scripts" ></th:block>
 
 
