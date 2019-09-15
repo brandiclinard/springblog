@@ -60,7 +60,7 @@ public class BookController {
         return "books/index";
     }
 
-    @GetMapping("/books/{id}")
+    @GetMapping("books/{id}")
     public String showBook(@PathVariable long id, Model viewModel){
         Book book= bookDao.findOne(id);
         viewModel.addAttribute("book", book );

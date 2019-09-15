@@ -10,6 +10,7 @@ public class Status {
     @Id
     @GeneratedValue
     private long id;
+
     @Column
     private String name;
 

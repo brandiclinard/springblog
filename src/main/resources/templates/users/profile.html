@@ -24,6 +24,25 @@
         Email: <span th:text="${#authentication.principal.email}"/>
     </div>
     <a th:href="@{/users/edit/{id}(id=${user.id})}">Edit Profile</a>
+    <br/>
+    <br/>
+
+    <h3>Current:</h3>
+    <div class = "current" th:each="book : ${currentBooks}">
+        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+    </div>
+    <br/>
+        <h3>Wish:</h3>
+    <div class = "wish" th:each="book : ${wishBooks}">
+        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+    </div>
+    <br/>
+        <h3>Complete:</h3>
+    <div class = "complete" th:each="book : ${completeBooks}">
+        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+    </div>
+
+
 
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndfkQsUo3AUnvL6hTXiUNbo1lugG-FzTiNaxwmfPyKFYRbPLg" alt="" th:if="${user.id == #authentication.principal.id}"/>
 
