@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+<head>
+    <th:block th:replace="fragments/header :: main-header('Books')"></th:block>
+
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+<br/><br/>
+
+<div class="container">
+<h1>You will view books here!</h1>
+
+    <!--<a th:href="@{/posts/delete/all}" class="btn btn-primary">Delete all Posts</a>-->
+    <form class="form-inline my-2 my-lg-0" action="/books/search" method="get">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="term" />
+        <button class="btn my-2 my-sm-0" type="submit">Search by Your Words</button>
+    </form>
+    <form class="form-inline my-2 my-lg-0" action="/books/seasonSearch" method="get">
+<!--        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="term" />-->
+        <select name="seasonSelection">
+            <option th:each="season : ${seasons}" th:value="${season.id}"><span th:text="${season.season}"></span></option>
+        </select>
+        <button class="btn my-2 my-sm-0" type="submit">Search by Season</button>
+    </form>
+<div>
+<!--    <div class="card" th:each="book : ${books}">-->
+<!--        <h1 th:text="${book.imgPath}" />-->
+        <div class="img" th:each="book : ${books}">
+        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+        <!--        <h5 th:text="${book.author}"></h5>-->
+<!--        <p th:text="${book.summary}" />-->
+<!--        <a th:href="@{/books/{id}(id=${book.id})}" class="btn btn-primary">View Book</a>-->
+        </div>
+
+<!--    </div>-->
+</div>
+
+
+</div>
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+
+
+
+
+<th:block th:include="fragments/footer :: my-footer">
+</th:block>
+</body>
+</html>

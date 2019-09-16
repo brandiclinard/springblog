@@ -1,6 +1,8 @@
 package com.codeup.springblog.repos;
 
+import com.codeup.springblog.models.Book;
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -15,13 +17,15 @@ public interface PostRepository extends CrudRepository<Post, Long> {// use model
 
 
 
-    Post findByTitle (String title);
+//    Post findByTitle (String title);
+//
+//    @Query("from Post p where p.title like %:term%")
+//    List<Post> searchByTitleLike(@Param("term") String term);
 
-    @Query("from Post p where p.title like %:term%")
-    List<Post> searchByTitleLike(@Param("term") String term);
 
+    List<Post> findByBook(Book book);
 
-
+    List<Post> findByUserAndBook(User user, Book book);
 
 
 

@@ -4,59 +4,79 @@
 
 <head>
     <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
-
-
 </head>
 <body>
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+
+<div id="carousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" th:src="@{${'img/decor1.jpg'}}" alt="900x400"  style="width: 900px; height: 400px;"/>
+            <img class="d-block w-100" th:src="@{${'img/gg1.jpg'}}" alt="900x400"  style="width: 900px; height: 400px;"/>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" th:src="@{${'img/decor2.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+            <img class="d-block w-100" th:src="@{${'img/gg2.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" th:src="@{${'img/decor3.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+            <img class="d-block w-100" th:src="@{${'img/gg3.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" th:src="@{${'img/decor4.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+            <img class="d-block w-100" th:src="@{${'img/gg4.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" th:src="@{${'img/decor5.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+            <img class="d-block w-100" th:src="@{${'img/gg5.webp'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" th:src="@{${'img/gg6.png'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" th:src="@{${'img/gg7.jpeg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" th:src="@{${'img/gg8.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" th:src="@{${'img/gg9.jpg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" th:src="@{${'img/gg10.jpeg'}}"  alt="900x400"  style="width: 900px; height: 400px;"/>
         </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
 </div>
 
-<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+    <th:block th:replace="fragments/navbar :: top-nav"></th:block>
+<br/><br/>
+
+<div class="container">
 
 
-<h1>this is the home page</h1>
+<h1>BLURB ABOUT GILMORE GIRLS READING CHALLENGE</h1>
 
-<div sec:authorize="isAuthenticated()">
-    This content is only shown to authenticated users.
+<!--<div sec:authorize="isAuthenticated()">-->
+<!--    This content is only shown to authenticated users.-->
 
-    User ID: <span th:text="${#authentication.principal.id}"/>
-    Username: <span th:text="${#authentication.principal.username}"/>
-    Email: <span th:text="${#authentication.principal.email}"/>
+<!--    User ID: <span th:text="${#authentication.principal.id}"/>-->
+<!--    Username: <span th:text="${#authentication.principal.username}"/>-->
+<!--    Email: <span th:text="${#authentication.principal.email}"/>-->
+<!--</div>-->
+
+<!--<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndfkQsUo3AUnvL6hTXiUNbo1lugG-FzTiNaxwmfPyKFYRbPLg" alt="" th:if="${role != 'admin'}"/>-->
+
+<!--<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTumSXy_ISZXpK1lrkrAyG3g_SYwJNps9K7D85RXz0MHzRGmk0TLQ" alt="" th:if="${role == 'admin'}"/>-->
+
+<!--<ul>-->
+<!--    <li class="lists" th:each="color : ${colors}" th:text="${color}"></li>-->
+<!--</ul>-->
+
+
 </div>
-
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndfkQsUo3AUnvL6hTXiUNbo1lugG-FzTiNaxwmfPyKFYRbPLg" alt="" th:if="${role != 'admin'}"/>
-
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTumSXy_ISZXpK1lrkrAyG3g_SYwJNps9K7D85RXz0MHzRGmk0TLQ" alt="" th:if="${role == 'admin'}"/>
-
-<ul>
-    <li class="lists" th:each="color : ${colors}" th:text="${color}"></li>
-</ul>
-
 
 <th:block th:include="fragments/bootstrap :: scripts" ></th:block>
 

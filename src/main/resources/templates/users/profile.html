@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+
+<head>
+    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+
+</head>
+<body>
+<div><th:block th:replace="fragments/navbar :: top-nav"></th:block></div>
+
+<br/>
+<br/>
+
+<div class="container">
+    <h1>Users profile!</h1>
+
+    <div sec:authorize="isAuthenticated()">
+        This content is only shown to authenticated users.
+
+        User ID: <span th:text="${#authentication.principal.id}"/>
+        Username: <span th:text="${#authentication.principal.username}"/>
+        Email: <span th:text="${#authentication.principal.email}"/>
+    </div>
+    <a th:href="@{/users/edit/{id}(id=${user.id})}">Edit Profile</a>
+    <br/>
+    <br/>
+
+    <h3>Current:</h3>
+    <div class = "current" th:each="book : ${currentBooks}">
+        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+    </div>
+    <br/>
+        <h3>Wish:</h3>
+    <div class = "wish" th:each="book : ${wishBooks}">
+        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+    </div>
+    <br/>
+        <h3>Complete:</h3>
+    <div class = "complete" th:each="book : ${completeBooks}">
+        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+    </div>
+
+
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndfkQsUo3AUnvL6hTXiUNbo1lugG-FzTiNaxwmfPyKFYRbPLg" alt="" th:if="${user.id == #authentication.principal.id}"/>
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTumSXy_ISZXpK1lrkrAyG3g_SYwJNps9K7D85RXz0MHzRGmk0TLQ" alt="" th:if="${user.id != #authentication.principal.id}"/>
+
+<!--    <th:block>-->
+<!--    <div>-->
+<!--        <div class="card" th:each="post : ${posts}">-->
+<!--            <h1 th:text="${post.title}" />-->
+<!--            <p th:text="${post.body}" />-->
+<!--            <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">See Post</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </th:block>-->
+
+</div>
+
+
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+
+
+
+
+<th:block th:include="fragments/footer :: my-footer">
+</th:block>
+</body>
+</html>

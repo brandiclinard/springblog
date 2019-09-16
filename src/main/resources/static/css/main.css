@@ -36,9 +36,15 @@ li a:hover {
 .main-nav{
     position: fixed;
     left: 0;
-    top:25rem;
+    /*top:25rem;*/
+    /*top: 0;*/
     width: 100%;
     background-color: cornflowerblue;
     color: white;
     text-align: center;
 }
+
+/*.carousel{*/
+/*    position: static;*/
+/*    !*top: 4rem;*!*/
+/*}*/

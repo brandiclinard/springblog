@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Log In</title>
+    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+
 </head>
 <body>
-<h1>Log In</h1>
+<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+<br/><br/>
+
+<div class="container">
 <div class="alert alert-danger" th:if="${param.error}">
     Invalid Username and Password.
 </div>
 <div class="alert alert-warning" th:if="${param.logout}">
     You have been logged out.
 </div>
+<!--<div class="alert alert-success" th:if="${param.edit}">-->
+<!--    You have edited your credentials to log in. Please log in with your new credentials.-->
+<!--</div>-->
 
 <!--no form model binding due to just verifying parameters for login and ot creating or updating any information-->
+    <h1>Log In:</h1>
 <form th:action="@{/login}" method="post">
-    <label for="username">Username</label>
+    <label for="username">Username:</label>
     <input id="username" name="username" type="text" />
-    <label for="password">Password</label>
+    <br/>
+    <label for="password">Password:</label>
     <input id="password" name="password" type="password" />
-    <input type="submit" value="Log In" />
+    <br/>
+    <input type="submit" value="Sign In" />
 </form>
+
+</div>
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+<th:block th:include="fragments/footer :: my-footer"></th:block>
+
 </body>
 </html>
