@@ -12,28 +12,25 @@ public class Post {
     private String title;
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
-    @OneToOne
-    private User user;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostImg> imgs;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name="posts_categories",
-            joinColumns={@JoinColumn(name="post_id")},
-            inverseJoinColumns={@JoinColumn(name="category_id")}
-    )
-    private List<Category> categories;
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
+    @ManyToOne
+    @JoinColumn (name = "book_id")
+    private Book book;
 
 
     public Post(){}
 
-    public Post(long id, String title, String body, User user, List<PostImg> imgs, List<Category> categories) {
+    public Post(long id,String title, String body, List<PostImg> imgs, User user, Book book) {
         this.id = id;
         this.title = title;
         this.body = body;
-        this.user = user;
         this.imgs = imgs;
-        this.categories = categories;
+        this.user = user;
+        this.book = book;
     }
 
     public String getTitle() {
@@ -76,11 +73,11 @@ public class Post {
         this.imgs = imgs;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public Book getBook() {
+        return book;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

@@ -2,7 +2,6 @@ package com.codeup.springblog.controllers;
 
 
 import com.codeup.springblog.models.Post;
-import com.codeup.springblog.models.Category;
 import com.codeup.springblog.models.User;
 //import com.codeup.springblog.repos.CategoryRepository;
 import com.codeup.springblog.repos.PostRepository;
