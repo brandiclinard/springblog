@@ -25,6 +25,13 @@
 
 
     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post"><button class="btn btn-success"><a th:href="@{/books/userPosts/{id}(id=${book.id})}" >View Your Posts</a></button></form>
+
+
+    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+        <input type="hidden" name="bookId" th:value="${book.id}" />
+        <button class="btn btn-success"><a th:href="'/posts/create/' + ${book.id} + '/bookPost'" >Create a Post</a></button>
+    </form>
+
 <!--        <div class="card" th:each="post : ${posts}">-->
 <!--            <h1 th:text="${book.imgPath}" />-->
     <div class="img" th:each="post : ${posts}">

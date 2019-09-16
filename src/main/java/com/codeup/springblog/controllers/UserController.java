@@ -80,7 +80,7 @@ public class UserController {
 
 // THIS WORKS
     @GetMapping("/profileView")
-    public String profileView(Model viewModel, HttpServletRequest request){
+    public String profileView(Model viewModel){
         User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = userSession.getId();
         User userDB = userDao.findOne(userId);

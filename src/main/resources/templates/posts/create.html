@@ -6,10 +6,10 @@
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: top-nav"></th:block>
-<container>
+<div class="container">
     <br/><br/>
 <h1>Create a Post!</h1>
-
+<!--<h3 th:text="${post.}"></h3>-->
 
 
 <!--<form th:action="@{/posts/create}" method="post">-->
@@ -26,9 +26,13 @@
 <!--&lt;!&ndash;    </select>&ndash;&gt;-->
 <!--    <button class="btn btn-info">Create</button>-->
 <!--</form>-->
+<!--    <input type="hidden" name="id" th:value="${book.id}" />-->
 
-<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-    Title:
+
+
+    <form th:action="'/posts/create/' + ${book.id} + '/bookPost'" th:method="post" th:object="${post}">
+        <input type="hidden" name="bookId" th:value="${book.id}" />
+        Title:
     <input th:field="*{title}" />
     <br />
     Description:
@@ -37,7 +41,7 @@
     <button class="btn btn-info">Create</button>
 </form>
 
-</container>
+</div>
 
 <th:block th:include="fragments/bootstrap :: scripts" ></th:block>
 
