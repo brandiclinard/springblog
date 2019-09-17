@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <th:block th:replace="fragments/header :: main-header('Home')"></th:block>
+    <th:block th:replace="fragments/header :: main-header('Show Book')"></th:block>
 
 </head>
 <body>
@@ -26,6 +26,23 @@
 
     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post"><button class="btn btn-success"><a th:href="@{/books/userPosts/{id}(id=${book.id})}" >View Your Posts</a></button></form>
 
+    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+        <input type="hidden" name="bookId" th:value="${book.id}" />
+        <input type="hidden" name="current" th:value="current" />
+        <button class="btn btn-success"><a th:href="@{/profile/update/{id}/current(id=${book.id})}" >Add to Currently Reading List</a></button>
+    </form>
+
+    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+        <input type="hidden" name="bookId" th:value="${book.id}" />
+        <input type="hidden" name="current" th:value="wish" />
+        <button class="btn btn-success"><a th:href="@{/profile/update/{id}/wish(id=${book.id})}" >Add to Wish to Read List</a></button>
+    </form>
+
+    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+        <input type="hidden" name="bookId" th:value="${book.id}" />
+        <input type="hidden" name="current" th:value="complete" />
+        <button class="btn btn-success"><a th:href="@{/profile/update/{id}/complete(id=${book.id})}" >Add to Already Read List</a></button>
+    </form>
 
     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
         <input type="hidden" name="bookId" th:value="${book.id}" />

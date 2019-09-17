@@ -96,17 +96,79 @@ public class UserController {
         viewModel.addAttribute("wishBooks", wishBooks);
         viewModel.addAttribute("completeBooks", completeBooks);
 
-
-
         return("users/profile");
     }
 
+    @GetMapping("profile/update/{id}/current")
+    public String updateCurrentList(Model viewModel, @PathVariable long id){
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
 
-//    @GetMapping("user/profileView")
-//    public String userProfileView(Model viewModel){
-//        viewModel.addAttribute("user", new User());
-//        return "redirect:/profileView";
-//    }
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        User userDB = userDao.findOne(userId);
 
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("current");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
+
+    @PostMapping("profile/update/{id}/current")
+    public String  updateCurrentList() {
+
+        return "redirect:/profileView";
+    }
+
+    @GetMapping("profile/update/{id}/wish")
+    public String updateWishList(Model viewModel, @PathVariable long id){
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        User userDB = userDao.findOne(userId);
+
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("wish");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
+
+    @PostMapping("profile/update/{id}/wish")
+    public String  updateWishList() {
+
+        return "redirect:/profileView";
+    }
+
+    @GetMapping("profile/update/{id}/complete")
+    public String updateCompleteList(Model viewModel, @PathVariable long id){
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        User userDB = userDao.findOne(userId);
+
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("complete");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
+
+    @PostMapping("profile/update/{id}/complete")
+    public String  updateCompleteList() {
+
+        return "redirect:/profileView";
+    }
 
 }

@@ -115,7 +115,6 @@ public class PostController{
         viewModel.addAttribute("post", new Post());
         Book book = bookDao.findOne(id);
         viewModel.addAttribute("book", book);
-        System.out.println();
         return "/posts/create";
     }
 
@@ -126,13 +125,13 @@ public class PostController{
         Book bookDB = bookDao.findOne(id);
         post.setUser(userDB);
         post.setBook(bookDB);
-        System.out.println(userDB.getId());
-        System.out.println(bookDB.getId());
+//        System.out.println(userDB.getId());
+//        System.out.println(bookDB.getId());
 
         Post savedPost = postDao.save(post);
-        System.out.println(savedPost.getId());
-        System.out.println(savedPost.getUser().getId());
-        System.out.println(savedPost.getBook().getId());
+//        System.out.println(savedPost.getId());
+//        System.out.println(savedPost.getUser().getId());
+//        System.out.println(savedPost.getBook().getId());
 
 
         emailService.prepareAndSend(savedPost, "Post Created", String.format("Post with the ID of %d has been created!", savedPost.getId()));
