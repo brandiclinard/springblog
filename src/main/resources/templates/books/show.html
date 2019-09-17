@@ -34,13 +34,13 @@
 
     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
         <input type="hidden" name="bookId" th:value="${book.id}" />
-        <input type="hidden" name="current" th:value="wish" />
+        <input type="hidden" name="wish" th:value="wish" />
         <button class="btn btn-success"><a th:href="@{/profile/update/{id}/wish(id=${book.id})}" >Add to Wish to Read List</a></button>
     </form>
 
     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
         <input type="hidden" name="bookId" th:value="${book.id}" />
-        <input type="hidden" name="current" th:value="complete" />
+        <input type="hidden" name="complete" th:value="complete" />
         <button class="btn btn-success"><a th:href="@{/profile/update/{id}/complete(id=${book.id})}" >Add to Already Read List</a></button>
     </form>
 

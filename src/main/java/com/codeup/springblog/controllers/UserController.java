@@ -171,4 +171,176 @@ public class UserController {
         return "redirect:/profileView";
     }
 
+    @GetMapping("profile/remove/{id}/current")
+    public String removeCurrentList(Model viewModel, @PathVariable long id){
+
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.currentStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+//        emailService.prepareAndSend(toDelete, "Post Deleted", String.format("Post with the ID of %d has been deleted!", toDelete.getId()));
+
+        return "redirect:/profileView";
+    }
+
+    @PostMapping("profile/remove/{id}/current")
+    public String removeCurrentList(){
+        return"redirect:/profileView";
+    }
+
+    @GetMapping("profile/remove/{id}/wish")
+    public String removeWishList(Model viewModel, @PathVariable long id){
+
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.wishStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+//        emailService.prepareAndSend(toDelete, "Post Deleted", String.format("Post with the ID of %d has been deleted!", toDelete.getId()));
+
+        return "redirect:/profileView";
+    }
+
+    @PostMapping("profile/remove/{id}/wish")
+    public String removeWishList(){
+        return"redirect:/profileView";
+    }
+
+    @GetMapping("profile/remove/{id}/complete")
+    public String removeCompleteList(Model viewModel, @PathVariable long id){
+
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.completeStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+//        emailService.prepareAndSend(toDelete, "Post Deleted", String.format("Post with the ID of %d has been deleted!", toDelete.getId()));
+
+        return "redirect:/profileView";
+    }
+
+    @PostMapping("profile/remove/{id}/complete")
+    public String removeCompleteList(){
+        return"redirect:/profileView";
+    }
+
+    @GetMapping("profile/move/{id}/current-wish")
+    public String moveCurrentWish(Model viewModel, @PathVariable long id){
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.currentStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+        User userDB = userDao.findOne(userId);
+
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("wish");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
+
+    @GetMapping("profile/move/{id}/current-complete")
+    public String moveCurrentComplete(Model viewModel, @PathVariable long id){
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.currentStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+        User userDB = userDao.findOne(userId);
+
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("complete");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
+
+    @GetMapping("profile/move/{id}/wish-current")
+    public String moveWishCurrent(Model viewModel, @PathVariable long id){
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.wishStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+        User userDB = userDao.findOne(userId);
+
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("current");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
+
+    @GetMapping("profile/move/{id}/wish-complete")
+    public String moveWishComplete(Model viewModel, @PathVariable long id){
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.wishStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+        User userDB = userDao.findOne(userId);
+
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("complete");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
+
+    @GetMapping("profile/move/{id}/complete-current")
+    public String moveCompleteCurrent(Model viewModel, @PathVariable long id){
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.completeStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+        User userDB = userDao.findOne(userId);
+
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("current");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
+    @GetMapping("profile/move/{id}/complete-wish")
+    public String moveCompleteWish(Model viewModel, @PathVariable long id){
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        long statusId = statusDao.completeStatusObjectId(userId, id);
+        statusDao.delete(statusId);
+
+        Book book = bookDao.findOne(id);
+        viewModel.addAttribute("book", book);
+        User userDB = userDao.findOne(userId);
+
+        Status status = new Status();
+        status.setUser(userDB);
+        status.setBook(book);
+        status.setName("wish");
+
+        Status saveStatus = statusDao.save(status);
+        return "redirect:/profileView";
+    }
 }
