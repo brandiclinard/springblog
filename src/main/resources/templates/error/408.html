@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/header :: main-header('Uh-oh!')"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: top-nav"></th:block>
+<br/>
+<br/>
+<h1>Oh, noooooo!! Something went wrong!!!</h1>
+
+
+<img class="d-block w-100" src="https://media3.giphy.com/media/3ofT5OGmdbeaMtUSYg/200.webp?cid=790b76117f9e8264b69b963880cd1ae761a9345d311ac12e&rid=200.webp"  alt="900x400" />
+
+<th:block th:include="fragments/bootstrap :: scripts" ></th:block>
+<th:block th:include="fragments/footer :: my-footer"></th:block>
+
+</body>
+</html>

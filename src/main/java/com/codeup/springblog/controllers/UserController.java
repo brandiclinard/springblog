@@ -6,6 +6,8 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.repos.BookRepository;
 import com.codeup.springblog.repos.StatusRepository;
 import com.codeup.springblog.repos.UserRepository;
+import com.codeup.springblog.services.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,9 @@ public class UserController {
         this.statusDao = statusRepository;
         this.bookDao = bookRepository;
     }
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model viewModel){ // use this model for controller to view
@@ -54,21 +59,11 @@ public class UserController {
     public String update(@PathVariable long id, @ModelAttribute User user){
 
         User userSesssion = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        long userId = userSesssion.getId();
-//        boolean isAdmin = userSesssion.isAdmin();
-//        User userDB = userDao.findOne(userSesssion.getId());
         user.setId(userSesssion.getId());
-
-//        User original = userDao.findOne(id);
-//        user.setId(original.getId());
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
 
         User updatedUser = userDao.save(user);
-//        user.setPassword(original.getPassword());
-//        user.setUsername(original.getUsername());
-//        userDao.save(user);
-
 
 //        if(isAdmin) {
 //            return "redirect: /admindashboard";
@@ -197,7 +192,6 @@ public class UserController {
         long statusId = statusDao.wishStatusObjectId(userId, id);
         statusDao.delete(statusId);
 
-//        emailService.prepareAndSend(toDelete, "Post Deleted", String.format("Post with the ID of %d has been deleted!", toDelete.getId()));
 
         return "redirect:/profileView";
     }
@@ -342,5 +336,17 @@ public class UserController {
 
         Status saveStatus = statusDao.save(status);
         return "redirect:/profileView";
+    }
+
+    @GetMapping("profile/delete")
+    public String deleteProfile(Model viewModel){
+        User userSession = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = userSession.getId();
+        User userDB = userDao.findOne(userId);
+        userDao.delete(userId);
+
+        emailService.prepareAndSend(userDB, "Profile Deleted", String.format("The account associated with this email and the username: %s has been deleted!", userDB.getUsername()));
+
+        return "redirect:/login";
     }
 }

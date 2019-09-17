@@ -19,6 +19,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+//    private Boolean isAdmin;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -47,7 +48,18 @@ public class User {
         this.statuses = statuses;
     }
 
-//    security constructor -- anything updated with the original user needs to also be updated witht he copy
+//    public User(long id, String username, String email, String password, List<Book> books, List<Post> posts, List<Status> statuses) {
+//        this.id = id;
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+////        this.isAdmin = isAdmin;
+//        this.books = books;
+//        this.posts = posts;
+//        this.statuses = statuses;
+//    }
+
+//    security constructor -- anything updated with the original user needs to also be updated with the copy
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         email = copy.email;
@@ -110,4 +122,12 @@ public class User {
     public void setStatuses(List<Status> statuses) {
         this.statuses = statuses;
     }
+
+//    public Boolean getAdmin() {
+//        return isAdmin;
+//    }
+//
+//    public void setAdmin(Boolean admin) {
+//        isAdmin = admin;
+//    }
 }

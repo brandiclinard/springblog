@@ -8,6 +8,11 @@
 <th:block th:replace="fragments/navbar :: top-nav"></th:block>
 <br/><br/>
 
+
+<div class="alert alert-danger" th:if="${param.error}">
+    There was an Error Editing this post.
+</div>
+
 <div class="container">
 <!--edit form below-->
 

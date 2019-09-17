@@ -15,8 +15,15 @@
 </th:block>
 <br/><br/>
 
+<div class="alert alert-danger" th:if="${param.error}">
+    The Username or Email Already Exists..
+</div>
+
 <h1>Edit profile!</h1>
 
+<form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+    <button class="btn btn-success"><a th:href="@{/profile/delete}">Delete Profile</a></button>
+</form>
 <div sec:authorize="isAuthenticated()" class="container">
     <form th:action="@{'/users/edit/' + ${user.id}}" method="POST" th:object="${user}">
         <h4>Current Username: <span th:text="${#authentication.principal.username}"></span></h4>
