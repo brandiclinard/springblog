@@ -9,6 +9,9 @@
 <br/><br/>
 
 <div class="container">
+    <div class="alert alert-danger" th:if="${param.error}">
+        Either the Username or Email already exists.
+    </div>
 
 <h1>Create an account:</h1>
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">

@@ -35,7 +35,7 @@ public class HomeController {
             }
             viewModel.addAttribute("role", role);
 //            viewModel.addAttribute("colors", colors);
-        return "/home";
+        return "home";
         }
 
 }

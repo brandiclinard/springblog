@@ -6,29 +6,18 @@
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: top-nav"></th:block>
-<container>
+<div class="container">
     <br/><br/>
+
+    <div class="alert alert-danger" th:if="${param.error}">
+        There was an error creating your post.
+    </div>
+
 <h1>Create a Post!</h1>
 
-
-
-<!--<form th:action="@{/posts/create}" method="post">-->
-<!--    Title:<br/>-->
-<!--    <input type="text" name="title"/><br/>-->
-<!--    Body:<br/>-->
-<!--    <input type="text" name="body"/><br/><br/>-->
-<!--    images:<br/>-->
-<!--    <input type="text" name="path"/><br/><br/>-->
-<!--&lt;!&ndash;    Categories:<br/>&ndash;&gt;-->
-<!--&lt;!&ndash;    <select multiple name="categories">&ndash;&gt;-->
-<!--&lt;!&ndash;        <option th:value="">Volvo</option>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    </select>&ndash;&gt;-->
-<!--    <button class="btn btn-info">Create</button>-->
-<!--</form>-->
-
-<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-    Title:
+    <form th:action="'/posts/create/' + ${book.id} + '/bookPost'" th:method="post" th:object="${post}">
+        <input type="hidden" name="bookId" th:value="${book.id}" />
+        Title:
     <input th:field="*{title}" />
     <br />
     Description:
@@ -37,7 +26,7 @@
     <button class="btn btn-info">Create</button>
 </form>
 
-</container>
+</div>
 
 <th:block th:include="fragments/bootstrap :: scripts" ></th:block>
 

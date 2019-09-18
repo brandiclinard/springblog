@@ -17,37 +17,81 @@
     <h1>Users profile!</h1>
 
     <div sec:authorize="isAuthenticated()">
-        This content is only shown to authenticated users.
+<!--        This content is only shown to authenticated users.-->
 
-        User ID: <span th:text="${#authentication.principal.id}"/>
+<!--        User ID: <span th:text="${#authentication.principal.id}"/>-->
         Username: <span th:text="${#authentication.principal.username}"/>
         Email: <span th:text="${#authentication.principal.email}"/>
     </div>
     <a th:href="@{/users/edit/{id}(id=${user.id})}">Edit Profile</a>
     <br/>
     <br/>
-
+<div class = "row">
     <h3>Current:</h3>
     <div class = "current" th:each="book : ${currentBooks}">
         <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <button class="btn btn-success"><a th:href="@{/profile/remove/{id}/current(id=${book.id})}">Remove</a></button>
+        </form>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <button class="btn btn-success"><a th:href="@{/profile/move/{id}/current-wish(id=${book.id})}">Move to Wish List</a></button>
+        </form>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <button class="btn btn-success"><a th:href="@{/profile/move/{id}/current-complete(id=${book.id})}">Move to Complete List</a></button>
+        </form>
     </div>
+</div>
     <br/>
+    <div class = "row">
         <h3>Wish:</h3>
-    <div class = "wish" th:each="book : ${wishBooks}">
-        <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+        <div class = "wish" th:each="book : ${wishBooks}">
+            <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+                <input type="hidden" name="bookId" th:value="${book.id}" />
+                <button class="btn btn-success"><a th:href="@{/profile/remove/{id}/wish(id=${book.id})}">Remove</a></button>
+            </form>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+                <input type="hidden" name="bookId" th:value="${book.id}" />
+                <button class="btn btn-success"><a th:href="@{/profile/move/{id}/wish-current(id=${book.id})}">Move to Current List</a></button>
+            </form>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+                <input type="hidden" name="bookId" th:value="${book.id}" />
+                <button class="btn btn-success"><a th:href="@{/profile/move/{id}/wish-complete(id=${book.id})}">Move to Complete List</a></button>
+            </form>
+        </div>
     </div>
     <br/>
+    <div class = "row">
         <h3>Complete:</h3>
     <div class = "complete" th:each="book : ${completeBooks}">
         <a th:href="@{/books/{id}(id=${book.id})}"><img th:src="${book.imgPath}" class="rounded float-left" alt="image"/></a>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <button class="btn btn-success"><a th:href="@{/profile/remove/{id}/complete(id=${book.id})}">Remove</a></button>
+        </form>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <button class="btn btn-success"><a th:href="@{/profile/move/{id}/complete-current(id=${book.id})}">Move to Current List</a></button>
+        </form>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+            <input type="hidden" name="bookId" th:value="${book.id}" />
+            <button class="btn btn-success"><a th:href="@{/profile/move/{id}/complete-wish(id=${book.id})}">Move to Wish List</a></button>
+        </form>
+    </div>
     </div>
 
 
 
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndfkQsUo3AUnvL6hTXiUNbo1lugG-FzTiNaxwmfPyKFYRbPLg" alt="" th:if="${user.id == #authentication.principal.id}"/>
 
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTumSXy_ISZXpK1lrkrAyG3g_SYwJNps9K7D85RXz0MHzRGmk0TLQ" alt="" th:if="${user.id != #authentication.principal.id}"/>
+<!--    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSndfkQsUo3AUnvL6hTXiUNbo1lugG-FzTiNaxwmfPyKFYRbPLg" alt="" th:if="${user.id == #authentication.principal.id}"/>-->
+<!---->
+<!--    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTumSXy_ISZXpK1lrkrAyG3g_SYwJNps9K7D85RXz0MHzRGmk0TLQ" alt="" th:if="${user.id != #authentication.principal.id}"/>-->
 
+
+<!--    MAYBE TO SHOW INDIVIDUAL POSTS -->
 <!--    <th:block>-->
 <!--    <div>-->
 <!--        <div class="card" th:each="post : ${posts}">-->
@@ -59,7 +103,8 @@
 <!--    </th:block>-->
 
 </div>
-
+<br/>
+<br/>
 
 <th:block th:include="fragments/bootstrap :: scripts" ></th:block>
 
