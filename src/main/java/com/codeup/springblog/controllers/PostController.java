@@ -39,19 +39,19 @@ public class PostController{
 
     //the above two lines are the dependency injection to have access to the db
 
-    @GetMapping("/posts")
-    public String index(Model viewModel){
-        Iterable<Post> posts = postDao.findAll();
-        viewModel.addAttribute("posts", posts );
-        return "posts/index";
-
-
-    @GetMapping("/posts/{id}")
-    public String show(@PathVariable long id, Model viewModel){
-        Post post = postDao.findOne(id);
-        viewModel.addAttribute("post", post );
-        return "posts/show";
-    }
+//    @GetMapping("/posts")
+//    public String index(Model viewModel){
+//        Iterable<Post> posts = postDao.findAll();
+//        viewModel.addAttribute("posts", posts );
+//        return "posts/index";
+//
+//
+//    @GetMapping("/posts/{id}")
+//    public String show(@PathVariable long id, Model viewModel) {
+//        Post post = postDao.findOne(id);
+//        viewModel.addAttribute("post", post );
+//        return "posts/show";
+//    }
 
 //    @GetMapping("/posts/search")
 //    public String show(@RequestParam(name = "term") String term, Model viewModel) {
